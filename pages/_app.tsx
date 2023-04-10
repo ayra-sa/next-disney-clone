@@ -13,16 +13,6 @@ type AppPropsWithAuth = AppProps & {
   };
 };
 
-// export default function App({ Component, pageProps }: AppProps) {
-//   return (
-//     <SessionProvider session={pageProps.session}>
-//       <div className={mons.className}>
-//         <Component {...pageProps}></Component>
-//       </div>
-//     </SessionProvider>
-//   );
-// }
-
 export default function App({ Component, pageProps }: AppPropsWithAuth) {
   console.log(Component.requireAuth)
   return <SessionProvider session={pageProps.session}>

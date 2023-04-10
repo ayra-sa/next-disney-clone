@@ -1,7 +1,10 @@
 import React from 'react'
 import Carousel from './Carousel'
 
-type Props = {}
+type Props = {
+  data: [],
+  title: string
+}
 
 export default function Discover({data, title}: Props) {
 

@@ -17,24 +17,11 @@ type Props = {
 
 function Tv({ result, same, vid }: Props) {
   console.log(result);
-  const index = vid.results.findIndex((element) => element.type === "Trailer");
+  const index = vid.results.findIndex((element: any) => element.type === "Trailer");
   const session = useSession()
   console.log(session);
   const router = useRouter()
 
-  // useEffect(() => {
-  //   if (session.status === 'unauthenticated') {
-  //     router.push("/")
-  //   }
-  // }, [])
-
-  // if (session.status === "loading") {
-  //   return <p>Loading...</p>
-  // }
-
-  // if (session.status === "unauthenticated") {
-  //   return router.push("/")
-  // }
 
   return (
     <Layout>
@@ -51,6 +38,8 @@ function Tv({ result, same, vid }: Props) {
           overview={result.overview}
           season={`${result.number_of_seasons} seasons`}
           episodes={`${result.number_of_episodes} episodes`}
+          runtime={null}
+          release={null}
         />
 
         <div className="mt-20 px-5 lg:px-0">

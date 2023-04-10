@@ -2,10 +2,9 @@ import BannerDetail from "@/components/BannerDetail";
 import Layout from "@/components/Layout";
 import Similiar from "@/components/Similiar";
 import { GetServerSideProps } from "next";
-import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import ReactPlayer from "react-player";
 
 type Props = {
@@ -15,7 +14,7 @@ type Props = {
 };
 
 function Movie({ result, same, vid }: Props) {
-  const index = vid.results.findIndex((element) => element.type === "Trailer");
+  const index = vid.results.findIndex((element: any) => element.type === "Trailer");
   const router = useRouter()
   
   return (
@@ -33,6 +32,8 @@ function Movie({ result, same, vid }: Props) {
           overview={result.overview}
           release={result.release_date}
           runtime={result.runtime}
+          season={null}
+          episodes={null}
         />
 
         <div className="mt-20 px-5 lg:px-0">

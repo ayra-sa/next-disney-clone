@@ -7,9 +7,20 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
-type Props = {};
+type Props = {
+  data: []
+};
+
+type Data = {
+  id: number;
+  poster_path: string;
+  title: string;
+  original_title: string;
+  name: string;
+  original_name: string;
+  release_date: any;
+}
 
 export default function Similiar({ data }: Props) {
   const BASE_URL = "https://image.tmdb.org/t/p/original";
@@ -39,23 +50,30 @@ export default function Similiar({ data }: Props) {
       modules={[Navigation]}
       className="py-8 mySwiper"
     >
-      {data.map((d) => (
+      {data.map(({
+        id,
+        poster_path,
+        title,
+        original_title,
+        name,
+        original_name
+      }: Data) => (
         <SwiperSlide
-          key={d.id}
+          key={id}
           className="group relative h-52 cursor-pointer transition-all duration-300 hover:scale-125 hover:z-10 first:hover:origin-left"
-          onClick={() => router.replace(`/movie/${d.id}`)}
+          onClick={() => router.replace(`/movie/${id}`)}
         >
           <Image
-            src={`${BASE_URL}${d.poster_path}`}
+            src={`${BASE_URL}${poster_path}`}
             alt="poster"
             className="object-center rounded-lg"
             priority
             fill
-            sizes="100vw"
+            // sizes="100vw"
           />
           <div className="absolute p-3 thumb-overlay top-0 bottom-0 left-0 right-0 hidden flex-col rounded-lg justify-end transition-all duration-200 group-hover:flex">
             <b className="text-[8px]">{`${
-              d.title || d.original_title || d.name || d.original_name
+              title || original_title || name || original_name
             }`}</b>
             {/* <p>{d.overview}</p> */}
           </div>

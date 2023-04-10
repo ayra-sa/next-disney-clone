@@ -6,10 +6,10 @@ type Props = {
   title: string,
   genre: string,
   overview: string,
-  season: string,
-  episodes: string,
-  runtime: number,
-  release: string
+  season: any,
+  episodes: any,
+  runtime: any,
+  release: any
 };
 
 export default function BannerDetail({

@@ -9,7 +9,10 @@ import "swiper/css/pagination";
 import Carousel from "./Carousel";
 
 
-type Props = {};
+type Props = {
+  title: string,
+  data: []
+};
 
 
 export default function Movies({ title, data }: Props) {

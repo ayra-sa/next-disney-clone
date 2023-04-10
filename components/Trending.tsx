@@ -1,9 +1,9 @@
-import Image from 'next/image'
 import React from 'react'
-import {Swiper, SwiperSlide} from 'swiper/react'
 import Carousel from './Carousel'
 
-type Props = {}
+type Props = {
+  data: []
+}
 
 
 export default function Trending({data}: Props) {

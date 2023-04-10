@@ -8,17 +8,28 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useRouter } from "next/router";
 
-
 type Props = {
-  data: [],
-  page: string
+  data: [];
+  page: string;
 };
 
-export default function Carousel({data, page}: Props) {
+type Data = {
+  id: number;
+  media_type: string;
+  poster_path: string;
+  title: string;
+  original_title: string;
+  name: string;
+  original_name: string;
+  release_date: any;
+  overview: string;
+};
 
-  const BASE_URL = 'https://image.tmdb.org/t/p/original'
+export default function Carousel({ data, page }: Props) {
+  console.log(data);
+  const BASE_URL = "https://image.tmdb.org/t/p/original";
 
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <Swiper
@@ -42,27 +53,43 @@ export default function Carousel({data, page}: Props) {
       modules={[Navigation]}
       className="py-8 mySwiper"
     >
-      {data.map((d) => (
-        <SwiperSlide
-          key={d.id}
-          className="group relative h-52 cursor-pointer transition-all duration-500 hover:scale-125 hover:z-10 first:hover:origin-left"
-          onClick={() => router.push(`${d.media_type || page}/${d.id}`)}
-        >
-          <Image
-            src={`${BASE_URL}${d.poster_path}`}
-            alt="poster"
-            className="object-center rounded-lg"
-            priority
-            fill
-            sizes="100vw"
-          />
-          <div className="absolute p-3 thumb-overlay top-0 bottom-0 left-0 right-0 hidden flex-col rounded-lg justify-end transition-all duration-200 group-hover:flex">
-            <b className="text-[8px]">{`${d.title || d.original_title || d.name || d.original_name}`}</b>
-            <p className="text-[8px] text-neutral-400">{new Date(d.release_date).getFullYear() || 'Coming Soon'}</p>
-            <p className="text-[8px]">{d.overview.slice(0, 60) + '...'}</p>
-          </div>
-        </SwiperSlide>
-      ))}
+      {data.map(
+        ({
+          id,
+          media_type,
+          poster_path,
+          title,
+          original_title,
+          name,
+          original_name,
+          release_date,
+          overview,
+        }: Data) => (
+          <SwiperSlide
+            key={id}
+            className="group relative h-52 cursor-pointer transition-all duration-500 hover:scale-125 hover:z-10 first:hover:origin-left"
+            onClick={() => router.push(`${media_type || page}/${id}`)}
+          >
+            <Image
+              src={`${BASE_URL}${poster_path}`}
+              alt="poster"
+              className="object-center rounded-lg"
+              priority
+              fill
+              // sizes="100vw"
+            />
+            <div className="absolute p-3 thumb-overlay top-0 bottom-0 left-0 right-0 hidden flex-col rounded-lg justify-end transition-all duration-200 group-hover:flex">
+              <b className="text-[8px]">{`${
+                title || original_title || name || original_name
+              }`}</b>
+              <p className="text-[8px] text-neutral-400">
+                {new Date(release_date).getFullYear() || "Coming Soon"}
+              </p>
+              <p className="text-[8px]">{overview.slice(0, 60) + "..."}</p>
+            </div>
+          </SwiperSlide>
+        )
+      )}
     </Swiper>
   );
 }
