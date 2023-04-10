@@ -3,7 +3,7 @@ import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { firestore } from "@/lib/firestore";
 
-const { GOOGLE_ID = "", GOOGLE_SECRET = "", NEXTAUTH_SECRET= "" } = process.env;
+const { GOOGLE_ID = "", GOOGLE_SECRET = "", NEXT_PUBLIC_SECRET= "" } = process.env;
 
 export const authOptions: AuthOptions = {
   // Configure one or more authentication providers
@@ -16,7 +16,7 @@ export const authOptions: AuthOptions = {
   ],
 
   adapter: FirestoreAdapter(firestore),
-  secret: NEXTAUTH_SECRET,
+  secret: NEXT_PUBLIC_SECRET,
   // pages: {
   //   signIn: '/auth/signin'
   // }
